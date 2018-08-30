@@ -14,4 +14,4 @@
 ##### How to use:
 + Make request to: 
   <pre><code>localhost:8080/image/{id}</code></pre>
-+ E.g. image id: <code>zyoc4U0</code>
++ e.g. image id: <code>zyoc4U0</code>
