@@ -3,7 +3,7 @@
  + Imgur: <pre><code> https://apidocs.imgur.com/</code></pre>
  + Redis: <pre><code> https://redis.io/ </code></pre>
 ##### Configuration and Start the Server:
-+ Make sure that your redis server running locally and configured on port: - Red 6379.
++ Make sure that your redis server running locally and configured on port: <div color='red'> 6379 </div>
 
 + Install dependencies: 
   <pre><code> mvn clean install</code></pre>
