@@ -12,6 +12,6 @@
   
   
 ##### How to use:
-+ Make request with the postman to: 
++ Make request with request to: 
   <pre><code>localhost:8080/image{id}</code></pre>
 + E.g. image id: <code>zyoc4U0</code>
