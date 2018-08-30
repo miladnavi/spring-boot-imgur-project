@@ -8,7 +8,7 @@
 + Install dependencies: 
   <pre><code> mvn clean install</code></pre>
 + Run: 
-  <pre><code> mvn clean install</code></pre>
+  <pre><code> mvn spring-boot:run</code></pre>
   
   
 ##### How to use:
