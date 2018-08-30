@@ -9,3 +9,9 @@
   <pre><code> mvn clean install</code></pre>
 + Run: 
   <pre><code> mvn clean install</code></pre>
+  
+  
+##### How to use:
++ Make request with the postman to: 
+  <pre><code>localhost:8080/image{id}</code></pre>
++ E.g. image id: <code>zyoc4U0</code>
