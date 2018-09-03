@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 public class Data {
-  @JsonIgnoreProperties(ignoreUnknown = true)
+  //@JsonIgnoreProperties(ignoreUnknown = true)
  
 	@JsonProperty("id")
 	public String id;	

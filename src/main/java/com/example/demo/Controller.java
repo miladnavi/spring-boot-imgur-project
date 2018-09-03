@@ -17,7 +17,7 @@ public class Controller {
 
   @GetMapping("image/{id}")
   public Image getImage(@PathVariable("id") String id) {
-    LOGGER.info("getImage called for id {}", id);
+    //LOGGER.info("getImage called for id {}", id);
     return imageService.getImage(id);
   }
 

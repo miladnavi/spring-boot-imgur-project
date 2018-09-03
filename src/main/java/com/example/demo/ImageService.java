@@ -18,10 +18,9 @@ public class ImageService {
   // Request URI
   private static final String IMGUR_GALLERY_URI = "https://api.imgur.com/3/gallery/hot/viral/all/1?showViral=true&mature=false&album_previews=false";
 
-  // public
-  private int gallery_counter = 0;
-  private int image_counter = 0;
-  private boolean is_id = false;
+  private int gallery_counter;
+  private int image_counter;
+  private boolean is_id;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ImageService.class);
 
@@ -35,16 +34,18 @@ public class ImageService {
     headers.add("Authorization", "Client-ID " + CLIENT_ID);
     HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
     ResponseEntity<Gallery> response = restTemplate.exchange(IMGUR_GALLERY_URI, HttpMethod.GET, entity, Gallery.class);
-
     while (response.getBody().data.length > gallery_counter) {
-      while (response.getBody().data[gallery_counter].images.length > image_counter) {
-        if (response.getBody().data[gallery_counter].images[image_counter].id.equals(id)) {
-          is_id = true;
-          break;
-        }
-        else {
-          is_id = false;
-          image_counter++;
+      image_counter = 0;
+      if (!(response.getBody().data[gallery_counter].images.equals(null))) {
+        while (response.getBody().data[gallery_counter].images.length > image_counter) {
+          if (response.getBody().data[gallery_counter].images[image_counter].id.equals(id)) {
+            is_id = true;
+            break;
+          }
+          else {
+            is_id = false;
+            image_counter++;
+          }
         }
       }
       if (is_id) {
