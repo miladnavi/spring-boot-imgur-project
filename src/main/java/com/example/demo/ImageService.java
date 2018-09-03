@@ -43,7 +43,6 @@ public class ImageService {
           break;
         }
         else {
-          System.out.println("Image for ID : " + image_counter);
           is_id = false;
           image_counter++;
         }
