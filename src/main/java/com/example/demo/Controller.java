@@ -31,26 +31,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 public class Controller {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
+  @Autowired
+  private ImageService imageService;
 
-	//Request to Imgur Gallery end-point
-//	@RequestMapping("/hello")
-//	public Data get() throws JsonParseException, JsonMappingException, IOException {
-//		
-//		
-//	    
-//		
-//		
-//	}
-	
-	@Autowired
-	private ImageService imageService;
-	
-	@GetMapping("image/{id}")
-	public Image getImage(@PathVariable("id") String id) {
-		LOGGER.info("getImage called for id {}", id);
-		return imageService.getImage(id);
-	}
-	
+  @GetMapping("image/{id}")
+  public Image getImage(@PathVariable("id") String id) {
+    LOGGER.info("getImage called for id {}", id);
+    return imageService.getImage(id);
+  }
+
 }
