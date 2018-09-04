@@ -24,7 +24,7 @@ public class ImageService {
   private static final Logger LOGGER = LoggerFactory.getLogger(ImageService.class);
 
   @Cacheable("image")
-  public Image getImage(String id) {
+  public Images getImage(String id) {
     LOGGER.info("getImage called for id {}", id);
    
     RestTemplate restTemplate = new RestTemplate();
@@ -33,21 +33,14 @@ public class ImageService {
     HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
     ResponseEntity<Gallery> response = restTemplate.exchange(IMGUR_GALLERY_URI, HttpMethod.GET, entity, Gallery.class);
 
-    List<Data> datas = response.getBody().data.stream().filter(data -> !(data.images == null))
-        .collect(Collectors.toList());
-    String link = null;
-    String mp4 = null;
-    String gifv = null;
-    List<Data> responseImage = datas.stream()
-        .filter(inner -> inner.images.stream().anyMatch(image -> id.equals(image.id))).collect(Collectors.toList());
-    for (Data dat : responseImage) {
-      for (Images image : dat.images) {
-        link = image.link;
-        mp4 = image.mp4;
-        gifv = image.gifv;
-      }
-    }
-    
-    return new Image(id, link, mp4, gifv);
+    List<Data> datas = response.getBody().getData().stream().filter(data -> !(data.getImages() == null))
+      .collect(Collectors.toList());
+
+    Optional <Data> responseImage = datas.stream()
+        .filter(inner -> inner.getImages().stream().anyMatch(image -> id.equals(image.id))).findFirst();
+    if(responseImage.isPresent())
+      return responseImage.get().getImages().get(0);
+    else
+      return null;
   }
 }

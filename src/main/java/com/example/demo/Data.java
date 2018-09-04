@@ -13,4 +13,24 @@ public class Data {
   public String title; 
   @JsonProperty("images")
   public ArrayList<Images> images;
+  public String getId() {
+    return id;
+  }
+  public void setId(String id) {
+    this.id = id;
+  }
+  public String getTitle() {
+    return title;
+  }
+  public void setTitle(String title) {
+    this.title = title;
+  }
+  public ArrayList<Images> getImages() {
+    return images;
+  }
+  public void setImages(ArrayList<Images> images) {
+    this.images = images;
+  }
+  
+  
 }
