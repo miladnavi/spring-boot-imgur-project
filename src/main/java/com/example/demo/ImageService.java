@@ -1,5 +1,9 @@
 package com.example.demo;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
@@ -34,29 +38,20 @@ public class ImageService {
     headers.add("Authorization", "Client-ID " + CLIENT_ID);
     HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
     ResponseEntity<Gallery> response = restTemplate.exchange(IMGUR_GALLERY_URI, HttpMethod.GET, entity, Gallery.class);
-    while (response.getBody().data.length > gallery_counter) {
-      image_counter = 0;
-      if (!(response.getBody().data[gallery_counter].images.equals(null))) {
-        while (response.getBody().data[gallery_counter].images.length > image_counter) {
-          if (response.getBody().data[gallery_counter].images[image_counter].id.equals(id)) {
-            is_id = true;
-            break;
-          }
-          else {
-            is_id = false;
-            image_counter++;
-          }
-        }
-      }
-      if (is_id) {
-        break;
-      }
-      else {
-        gallery_counter++;
+    List<Data> datas = response.getBody().data.stream().filter(data -> !(data.images == null))
+        .collect(Collectors.toList());
+    String link = null;
+    String mp4 = null;
+    String gifv = null;
+    List<Data> responseImage = datas.stream()
+        .filter(inner -> inner.images.stream().anyMatch(image -> id.equals(image.id))).collect(Collectors.toList());
+    for (Data dat : responseImage) {
+      for (Images image : dat.images) {
+        link = image.link;
+        mp4 = image.mp4;
+        gifv = image.gifv;
       }
     }
-    return new Image(id, response.getBody().data[gallery_counter].images[image_counter].link,
-        response.getBody().data[gallery_counter].images[image_counter].mp4,
-        response.getBody().data[gallery_counter].images[image_counter].gifv);
+    return new Image(id, link, mp4, gifv);
   }
 }
