@@ -24,7 +24,7 @@ public class ImageService {
   private static final Logger LOGGER = LoggerFactory.getLogger(ImageService.class);
 
   @Cacheable("image")
-  public Images getImage(String id) {
+  public Image getImage(String id) {
     LOGGER.info("getImage called for id {}", id);
    
     RestTemplate restTemplate = new RestTemplate();
@@ -35,7 +35,6 @@ public class ImageService {
 
     List<Data> datas = response.getBody().getData().stream().filter(data -> !(data.getImages() == null))
       .collect(Collectors.toList());
-
     Optional <Data> responseImage = datas.stream()
         .filter(inner -> inner.getImages().stream().anyMatch(image -> id.equals(image.id))).findFirst();
     if(responseImage.isPresent())

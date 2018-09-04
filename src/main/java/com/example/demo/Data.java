@@ -12,7 +12,7 @@ public class Data {
   @JsonProperty("title")
   public String title; 
   @JsonProperty("images")
-  public ArrayList<Images> images;
+  public ArrayList<Image> images;
   public String getId() {
     return id;
   }
@@ -25,10 +25,10 @@ public class Data {
   public void setTitle(String title) {
     this.title = title;
   }
-  public ArrayList<Images> getImages() {
+  public ArrayList<Image> getImages() {
     return images;
   }
-  public void setImages(ArrayList<Images> images) {
+  public void setImages(ArrayList<Image> images) {
     this.images = images;
   }
   
