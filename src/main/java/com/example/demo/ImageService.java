@@ -16,15 +16,10 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ImageService {
-  // Imgur data
-  private static final String CLIENT_ID = "bd18b0897a362ee";
 
-  // Request URI
+  private static final String IMGUR_CLIENT_ID = "bd18b0897a362ee";
+
   private static final String IMGUR_GALLERY_URI = "https://api.imgur.com/3/gallery/hot/viral/all/1?showViral=true&mature=false&album_previews=false";
-
-  private int gallery_counter;
-  private int image_counter;
-  private boolean is_id;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ImageService.class);
 
@@ -32,12 +27,18 @@ public class ImageService {
   public Image getImage(String id) {
     LOGGER.info("getImage called for id {}", id);
 
-    // Make request to Imgur
+    /*
+     *  Make request to Imgur gallery endpoint
+     */
     RestTemplate restTemplate = new RestTemplate();
     HttpHeaders headers = new HttpHeaders();
-    headers.add("Authorization", "Client-ID " + CLIENT_ID);
+    headers.add("Authorization", "Client-ID " + IMGUR_CLIENT_ID);
     HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
     ResponseEntity<Gallery> response = restTemplate.exchange(IMGUR_GALLERY_URI, HttpMethod.GET, entity, Gallery.class);
+
+    /*
+     * Finding image by requested id
+     */
     List<Data> datas = response.getBody().data.stream().filter(data -> !(data.images == null))
         .collect(Collectors.toList());
     String link = null;
@@ -52,6 +53,7 @@ public class ImageService {
         gifv = image.gifv;
       }
     }
+
     return new Image(id, link, mp4, gifv);
   }
 }

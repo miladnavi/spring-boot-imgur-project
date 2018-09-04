@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "adc77829-b424-46c5-8b06-d1185262e1e0",
+		"name": "imgur",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request Imgur API (get Image id)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bd18b0897a362ee"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://api.imgur.com/3/gallery/hot/viral/all/1?showViral=true&mature=false&album_previews=false",
+					"protocol": "https",
+					"host": [
+						"api",
+						"imgur",
+						"com"
+					],
+					"path": [
+						"3",
+						"gallery",
+						"hot",
+						"viral",
+						"all",
+						"1"
+					],
+					"query": [
+						{
+							"key": "showViral",
+							"value": "true"
+						},
+						{
+							"key": "mature",
+							"value": "false"
+						},
+						{
+							"key": "album_previews",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test image/{id} endpoint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/image/jokXbDS",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image",
+						"jokXbDS"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
