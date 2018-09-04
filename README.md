@@ -16,8 +16,7 @@
 ##### How to use:
 + There is post-man collection in path:
 	<pre><code>./src/main/java/post/man/test</code></pre>
-+ Import it to your Postman 
-+ Execute: 
++ Import it to your postman and execute: 
 	<pre><code>Request Imgur API (get Image id)</code></pre>
 + Choose an image id make request to: 
   	<pre><code>localhost:8080/image/{id}</code></pre>
