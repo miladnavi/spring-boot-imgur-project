@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.micrometer.core.lang.Nullable;
-
 public class Data {
   @JsonIgnoreProperties(ignoreUnknown = true)
   @JsonProperty("id")

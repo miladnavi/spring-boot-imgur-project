@@ -1,7 +1,7 @@
 package com.example.demo;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -26,19 +26,13 @@ public class ImageService {
   @Cacheable("image")
   public Image getImage(String id) {
     LOGGER.info("getImage called for id {}", id);
-
-    /*
-     *  Make request to Imgur gallery endpoint
-     */
+   
     RestTemplate restTemplate = new RestTemplate();
     HttpHeaders headers = new HttpHeaders();
     headers.add("Authorization", "Client-ID " + IMGUR_CLIENT_ID);
     HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
     ResponseEntity<Gallery> response = restTemplate.exchange(IMGUR_GALLERY_URI, HttpMethod.GET, entity, Gallery.class);
 
-    /*
-     * Finding image by requested id
-     */
     List<Data> datas = response.getBody().data.stream().filter(data -> !(data.images == null))
         .collect(Collectors.toList());
     String link = null;
@@ -53,7 +47,7 @@ public class ImageService {
         gifv = image.gifv;
       }
     }
-
+    
     return new Image(id, link, mp4, gifv);
   }
 }
