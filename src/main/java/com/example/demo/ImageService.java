@@ -33,6 +33,7 @@ public class ImageService {
     HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
     ResponseEntity<Gallery> response = restTemplate.exchange(IMGUR_GALLERY_URI, HttpMethod.GET, entity, Gallery.class);
 
+    
     List<Data> datas = response.getBody().getData().stream().filter(data -> !(data.getImages() == null))
       .collect(Collectors.toList());
     Optional <Data> responseImage = datas.stream()
